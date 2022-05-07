@@ -28,6 +28,7 @@ public class DefaultSubscriber implements Subscriber<Object>{
     @Override
     public void onNext(Object arg0) {
         System.out.println(name + "Received: " + arg0);
+        System.out.println("--------------------------------------------------------------------------------------");
         
     }
 

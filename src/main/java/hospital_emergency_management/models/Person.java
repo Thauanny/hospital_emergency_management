@@ -22,6 +22,8 @@ public class Person{
         String  symptoms = Util.faker().medical().symptoms();
         int age = Util.faker().number().numberBetween(1, 100);
         String name = Util.faker().name().fullName();
+
+        
         this.name = name;
         this.age = Integer.toString(age);
         this.situation = arr[rnd];
