@@ -1,11 +1,13 @@
 package hospital_emergency_management.models;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
 import hospital_emergency_management.utils.Util;
+import reactor.core.publisher.Flux;
 
 public class Person{
     private String id;
@@ -44,11 +46,25 @@ public class Person{
         return this.situation;
     }
 
-    public List<String> getNameSiAgeSymptomsSituation(){
+    public List<String> getNameAgeSymptomsSituationHour(){
         return Arrays.asList(this.name,  this.age, this.symptoms, this.situation, Integer.toString(this.localDateTime.getHour())+"h"+ Integer.toString(this.localDateTime.getMinute())+"M" );
     }
 
     public String getId(){
         return this.id;
     }
+
+
+    public static Flux<Person> personStream() {
+        return Flux
+          .interval(Duration.ofMillis(200))
+          .map(
+            i -> {
+              Person person = new Person();
+              System.out.print("Paciente  recem chegado: ");
+              System.out.println(person.getNameAgeSymptomsSituationHour());
+              return person;
+            }
+          );
+      }
 }
